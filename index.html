@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html>
+<title>Smart flood detection and warning system</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+
+
+
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif
+  }
+
+  .w3-row-padding img {
+    margin-bottom: 12px
+  }
+
+  /* Set the width of the sidebar to 120px */
+  .w3-sidebar {
+    width: 120px;
+    background: #222;
+  }
+
+  /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+  #main {
+    margin-left: 120px
+  }
+
+  /* Remove margins from "page content" on small screens */
+  @media only screen and (max-width: 600px) {
+    #main {
+      margin-left: 0
+    }
+  }
+</style>
+
+<body class="w3-black">
+
+  <!-- Icon Bar (Sidebar - hidden on small screens) -->
+  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+    <!-- Avatar image in top left corner -->
+    <img src="./images/logo.png" style="width:100%">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+      <i class="fa fa-home w3-xxlarge"></i>
+      <p>HOME</p>
+    </a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-user w3-xxlarge"></i>
+      <p>ABOUT</p>
+    </a>
+    <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-eye w3-xxlarge"></i>
+      <p>PHOTOS</p>
+    </a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-envelope w3-xxlarge"></i>
+      <p>CONTACT</p>
+    </a>
+  </nav>
+
+  <!-- Navbar on small screens (Hidden on medium and large screens) -->
+  <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+    <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+      <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+      <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="w3-padding-large" id="main">
+    <!-- Header/Home -->
+    <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+
+
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        * {
+          box-sizing: border-box
+        }
+
+        body {
+          font-family: Verdana, sans-serif;
+          margin: 0
+        }
+
+        .mySlides {
+          display: none
+        }
+
+        img {
+          vertical-align: middle;
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+          max-width: 100%;
+          position: relative;
+          margin: auto;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -22px;
+          color: white;
+          font-weight: bold;
+          font-size: 18px;
+          transition: 0.6s ease;
+          border-radius: 0 3px 3px 0;
+          user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+          right: 0;
+          border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Caption text */
+        .text {
+          color: #f2f2f2;
+          font-size: 15px;
+          padding: 8px 12px;
+          position: absolute;
+          bottom: 8px;
+          width: 100%;
+          text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+          color: #f2f2f2;
+          font-size: 12px;
+          padding: 8px 12px;
+          position: absolute;
+          top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+          cursor: pointer;
+          height: 15px;
+          width: 15px;
+          margin: 0 2px;
+          background-color: #bbb;
+          border-radius: 50%;
+          display: inline-block;
+          transition: background-color 0.6s ease;
+        }
+
+        .active,
+        .dot:hover {
+          background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+          -webkit-animation-name: fade;
+          -webkit-animation-duration: 1.5s;
+          animation-name: fade;
+          animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+          from {
+            opacity: .4
+          }
+
+          to {
+            opacity: 1
+          }
+        }
+
+        @keyframes fade {
+          from {
+            opacity: .4
+          }
+
+          to {
+            opacity: 1
+          }
+        }
+
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+
+          .prev,
+          .next,
+          .text {
+            font-size: 11px
+          }
+        }
+      </style>
+      </head>
+
+      <body>
+
+        <div class="slideshow-container">
+
+          <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="./images/cover1.jpg" style="width:100%">
+
+          </div>
+
+          <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="./images/cover2.jpg" style="width:100%">
+
+          </div>
+
+          <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="./images/cover3.png" style="width:100%">
+
+          </div>
+
+
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        </div>
+        <br>
+
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+
+        <script>
+          var slideIndex = 1;
+          showSlides(slideIndex);
+
+          function plusSlides(n) {
+            showSlides(slideIndex += n);
+          }
+
+          function currentSlide(n) {
+            showSlides(slideIndex = n);
+          }
+
+          function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+          }
+        </script>
+
+
+
+
+
+
+
+        <div class="w3-display-bottomleft w3-black w3-container w3-amber w3-hover-dark-grey w3-hide-small"
+          style="bottom:30%;opacity:0.5;width:50%; height: 35%">
+          <h1><br><br>FLOODIE</h1>
+    </header>
+
+    <style>
+      .button {
+        background-color: #e02f2f;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+      }
+
+
+      .button2:hover {
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+      }
+    </style>
+
+
+    <div class="row">
+      <div class="col-sm-5 w3-container w3-padding-32" style="background-color:#222;">
+        <center>
+          <h2>INTRODUCTION</h2>
+          <p>Floods are the most common natural disaster in the world. The main reason for flooding is the heavy rain.
+            Sri Lanka also faces floods almost in every year.</p>
+          <p>Floods cause great damage not only to human lives but also properties. Due to this, Sri Lankan government
+            spends a lot of money to provide relief to those affected by the floods. The main reason for this situation
+            is, the lack of a proper system for predicting rainfall and floods in Sri Lanka and informing the public
+            about it.</p>
+
+          <p>To this issue, floody proposes to create a proper weather forecasting and water level forecasting system
+            and visualize the flooding areas in a google map. And it propose a chatbot to give significant weather data
+            to the public.</p>
+          <p>The advancement of technology and resources in today's world is expanding by the day. Science and
+            technology can be used to forecast the weather in a particular location. Because of the complexity of the
+            physical processes involved and the variability of rainfall in place and time, weather forecasting has been
+            a tough issue in hydrology. Flooding can result in a variety of losses, including loss of life or injury,
+            property loss, settlement damage, irrigation system damage, and road damage. Machine Learning Algorithms
+            have been frequent and successful in water-related studies in recent years.</p>
+
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-sm-5 w3-container w3-padding-32" style="background-color:#222;">
+          <center>
+
+            <h2>view our resarch paper</h2>
+            <a href="./doc/resarchp.pdf" download>
+              <button class="button button2">VIEW PDF</button></a>
+
+          </center>
+        </div>
+
+
+
+
+      </div>
+      <br><br><br>
+
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Float four columns side by side */
+        .column {
+          float: left;
+          width: 14%;
+          padding: 0 10px;
+        }
+
+        /* Remove extra left and right margins, due to padding */
+        .row {
+          margin: 0 -5px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+          .column {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+          }
+        }
+
+        /* Style the counter cards */
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          padding: 16px;
+          text-align: center;
+          background-color: black;
+        }
+      </style>
+
+      <style>
+        /*
+essential styles:
+these make the slideshow work
+*/
+        #slides {
+          position: relative;
+          height: 300px;
+          padding: 0px;
+          margin: 0px;
+          list-style-type: none;
+        }
+
+        .slide {
+          position: absolute;
+          left: 0px;
+          top: 10px;
+          bottom: 0px;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          z-index: 1;
+
+          -webkit-transition: opacity 10s;
+          -moz-transition: opacity 10s;
+          -o-transition: opacity 2s;
+          transition: opacity 2s;
+        }
+
+        .showing {
+          opacity: 1;
+          z-index: 2;
+        }
+
+
+        .controls {
+          display: none;
+        }
+
+
+        /*
+non-essential styles:
+just for appearance; change whatever you want
+*/
+
+        .controls {
+          background: #333;
+          color: #fff;
+          border: none;
+          padding: 20px 0px;
+          font-size: 20px;
+          cursor: pointer;
+          border: 2px solid #fff;
+          margin: 10px 0px 0px 10px;
+          width: 70px;
+        }
+
+        .controls:hover,
+        .controls:focus {
+          background: #eee;
+          color: #333;
+        }
+
+        .container {
+          position: relative;
+        }
+
+        .buttons {
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          z-index: 10;
+          font-size: 0px;
+        }
+      </style>
+
+
+
+
+      <!-- Modal for full size images on click-->
+      <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+        <span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
+        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+          <div class="row"><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="column">
+              <div class="card">
+
+                <img src="vir.jpg" alt="boy" class="w3-image" width="100%"
+                  onclick="window.location.href='https://www.virtusa.com/?utm_source=google&utm_medium=paid&utm_campaign=6756630412&utm_term=virtusa&gclid=Cj0KCQiA5OuNBhCRARIsACgaiqWbUtT2dkAXZLLj75IYnEYv-gLGqRNkKcIjPtvoqH4Z-sygY2HKfvMaAgGREALw_wcB'">
+
+              </div>
+            </div>
+
+
+
+
+
+
+          </div>
+          <br><br><br><br><br><br><br><br><br><br>
+          <p id="caption">
+            <img id="img01" class="w3-image">
+          </p>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <script>
+        // Script to open and close sidebar
+        function w3_open() {
+          document.getElementById("mySidebar").style.display = "block";
+          document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+          document.getElementById("mySidebar").style.display = "none";
+          document.getElementById("myOverlay").style.display = "none";
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+          document.getElementById("img01").src = element.src;
+          document.getElementById("modal01").style.display = "block";
+          var captionText = document.getElementById("caption");
+          captionText.innerHTML = element.alt;
+        }
+
+      </script>
+
+      <br><br><br>
+      <script>
+
+        var controls = document.querySelectorAll('.controls');
+        for (var i = 0; i < controls.length; i++) {
+          controls[i].style.display = 'inline-block';
+        }
+
+        var slides = document.querySelectorAll('#slides .slide');
+        var currentSlide = 0;
+        var slideInterval = setInterval(nextSlide, 2000);
+
+        function nextSlide() {
+          goToSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+          goToSlide(currentSlide - 1);
+        }
+
+        function goToSlide(n) {
+          slides[currentSlide].className = 'slide';
+          currentSlide = (n + slides.length) % slides.length;
+          slides[currentSlide].className = 'slide showing';
+        }
+
+
+        var playing = true;
+        var pauseButton = document.getElementById('pause');
+
+        function pauseSlideshow() {
+          pauseButton.innerHTML = '&#9658;'; // play character
+          playing = false;
+          clearInterval(slideInterval);
+        }
+
+        function playSlideshow() {
+          pauseButton.innerHTML = '&#10074;&#10074;'; // pause character
+          playing = true;
+          slideInterval = setInterval(nextSlide, 2000);
+        }
+
+        pauseButton.onclick = function () {
+          if (playing) { pauseSlideshow(); }
+          else { playSlideshow(); }
+        };
+
+        var next = document.getElementById('next');
+        var previous = document.getElementById('previous');
+
+        next.onclick = function () {
+          pauseSlideshow();
+          nextSlide();
+        };
+        previous.onclick = function () {
+          pauseSlideshow();
+          previousSlide();
+        };
+
+
+
+      </script>
+
+
+
+    </div>
+
+
+    <!-- About Section -->
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+
+
+      .main {
+        background-color: #0a0a0a;
+        float: left;
+        width: 70%;
+        padding: 0 20px;
+        text-align: justify;
+        text-justify: inter-word;
+        margin-top: 0px;
+      }
+
+      .right {
+        background-color: #222;
+        float: left;
+        width: 30%;
+        padding: 15px;
+        margin-top: 0px;
+        text-align: justify;
+        text-justify: inter-word;
+
+      }
+
+      @media only screen and (max-width: 620px) {
+
+        /* For mobile phones: */
+        .right,
+        .main {
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+    </style>
+
+
+    </head>
+
+
+
+
+
+    <!-- End Contact Section -->
+
+    <div class="w3-row-padding w3-center w3-margin-top">
+      <div class="w3-third ">
+        <div class=" w3-card w3-container" style="min-height:460px; background-color:#222;"><br>
+          <h3>Literature Survey</h3>
+          <img src="./images/f.png" alt="boy" style="width:100%">
+
+
+          <button class="button button2" onclick="window.location.href='Literature.html'">VIEW MORE</button> <br>
+
+          <br>
+        </div>
+      </div>
+
+      <div class="w3-third">
+        <div class="w3-card w3-container" style="min-height:460px; background-color:#222;"><br>
+          <h3>Research Gap</h3>
+
+          <img src="./images/c.png" alt="boy" style="width:100%">
+
+          <button class="button button2" onclick="window.location.href='Research Gap.html'">VIEW MORE</button><br><br>
+        </div>
+      </div>
+
+      <div class="w3-third">
+        <div class="w3-card w3-container " style="min-height:460px; background-color:#222;"><br>
+          <h3>Research Problem</h3>
+          <img src="./images/d.png" alt="boy" style="width:100%">
+
+          <button class="button button2" onclick="window.location.href='Research Problem.html'">VIEW
+            MORE</button><br><br>
+        </div>
+      </div>
+    </div>
+
+    <br><br><br>
+
+    <div class="w3-row-padding w3-center w3-margin-top">
+      <div class="w3-third">
+        <div class="w3-card w3-container " style="min-height:460px; background-color:#222;"><br>
+          <h3>Research Objectives</h3>
+          <img src="./images/e.png" alt="boy" style="width:100%">
+
+          <button class="button button2" onclick="window.location.href='Research Objectives.html'">VIEW
+            MORE</button><br><br>
+        </div>
+      </div>
+
+      <div class="w3-third">
+        <div class="w3-card w3-container " style="min-height:460px; background-color:#222;"><br>
+          <h3>Methodology</h3>
+          <img src="./images/b.png" alt="boy" style="width:100%">
+          <button class="button button2" onclick="window.location.href='Methodology.html'">VIEW MORE</button><br><br>
+        </div>
+      </div>
+
+      <div class="w3-third">
+        <div class="w3-card w3-container " style="min-height:460px; background-color:#222;"><br>
+          <h3>Tools & Technologies</h3>
+          <img src="./images/a.png" alt="boy" style="width:100%">
+
+          <button class="button button2" onclick="window.location.href='Tools & Technologies.html'">VIEW
+            MORE</button><br><br>
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
+      <div class="col-sm-5 w3-container w3-padding-32" style="background-color:#222;">
+        <center>
+          <h2>MILESTONES</h2>
+          <p>All the assessments of the project</p>
+
+
+
+          <div class="w3-row-padding w3-center w3-margin-top">
+            <div class="w3-third ">
+              <div class=" w3-card w3-container" style="min-height:160px; background-color:#383838;"><br>
+                <h3>Project Proposal</h3>
+                <p>Proposal presentation and the proposal report submission.</p>
+                <p>Date : 06/10/2021 / Marks Allocated : 12% </p>
+
+
+
+
+
+              </div>
+            </div>
+
+            <div class="w3-third">
+              <div class="w3-card w3-container" style="min-height:160px; background-color:#383838;"><br>
+                <h3>Progress Presentation I</h3>
+                <p>50% progress presentation of the research project.</p>
+                <p>Date : 17/03/2022 / Marks Allocated : 15%</p>
+
+
+              </div>
+            </div>
+
+            <div class="w3-third">
+              <div class="w3-card w3-container " style="min-height:160px; background-color:#383838;"><br>
+                <h3>Progress Presentation II</h3>
+                <p>90% progress presentation of the research project.</p>
+                <p>Date : 02/05/2022 / Marks Allocated : 18%</p>
+
+
+              </div>
+            </div>
+          </div>
+
+          <br><br><br>
+
+          <div class="w3-row-padding w3-center w3-margin-top">
+            <div class="w3-third">
+              <div class="w3-card w3-container " style="min-height:160px; background-color:#383838;"><br>
+                <h3>Demonstration</h3>
+                <p>Submission and presentation of the camera-ready research poster.</p>
+                <p>Date : 05/07/2022 / Marks Allocated : 10% </p>
+
+
+              </div>
+            </div>
+
+            <div class="w3-third">
+              <div class="w3-card w3-container " style="min-height:160px; background-color:#383838;"><br>
+                <h3>Final Assessment</h3>
+                <p>Submission of final reports and the final presentation of the research.</p>
+                <p>Date : 05/07/2022 / Marks Allocated : 10%</p>
+
+
+              </div>
+            </div>
+
+            <div class="w3-third">
+              <div class="w3-card w3-container " style="min-height:160px; background-color:#383838;"><br>
+                <h3>Viva</h3>
+                <p>Final viva of the research project with an externel panel member.</p>
+                <p>Date : 05/07/2022 / Marks Allocated : 10%</p>
+
+
+              </div>
+            </div>
+          </div>
+          <br><br>
+
+        </center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <style>
+          * {
+            box-sizing: border-box
+          }
+
+          .container {
+            width: 100%;
+            background-color: #ddd;
+          }
+
+          .skills {
+            text-align: right;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: white;
+          }
+
+          .html {
+            width: 50%;
+            background-color: #ed7809;
+          }
+
+          .css {
+            width: 90%;
+            background-color: #ffb405;
+          }
+
+          .js {
+            width: 100%;
+            background-color: #ed7809;
+          }
+
+          .php {
+            width: 60%;
+            background-color: #ffb405;
+          }
+        </style>
+
+
+        <p>Progress Presentation I</p>
+        <div class="container">
+          <div class="skills html">50%</div>
+        </div>
+
+        <p>Progress Presentation II</p>
+        <div class="container">
+          <div class="skills css">90%</div>
+        </div>
+
+        <p>Final Evaluation & Viva</p>
+        <div class="container">
+          <div class="skills js">100%</div>
+        </div>
+
+
+
+
+
+
+
+        <!-- Team Section -->
+        <div class="w3-container" style="padding:128px 16px" id="team">
+          <h3 class="w3-center">THE TEAM</h3>
+
+          <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+            <div class="w3-col l3 m6 w3-margin-bottom">
+              <div class="w3-card">
+                <img src="./images/charith.png" alt="Jane" style="width:100%">
+                <div class="w3-container">
+                  <h3>Jayakantha J.H.C.M.</h3>
+                  <p class="w3-opacity">IT18256642</p>
+                  <p class="w3-opacity">charithmadu97@gmail.com</p>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+              <div class="w3-card">
+                <img src="./images/malith.png" alt="John" style="width:100%">
+                <div class="w3-container">
+                  <h3>Medaela M.P.G.P.M.G.</h3>
+                  <p class="w3-opacity">IT18207064</p>
+                  <p class="w3-opacity">Malith.gayashan@gmail.com</p>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+              <div class="w3-card">
+                <img src="./images/isuru.png" alt="Mike" style="width:100%">
+                <div class="w3-container">
+                  <h3>Kumarasiri A.D.V.I.S</h3>
+                  <p class="w3-opacity">IT18258172</p>
+                  <p class="w3-opacity">12isurukumarasiri@gmail.com</p>
+
+                </div>
+              </div>
+            </div>
+            <div class="w3-col l3 m6 w3-margin-bottom">
+              <div class="w3-card">
+                <img src="./images/charm.png" alt="Dan" style="width:100%">
+                <div class="w3-container">
+                  <h3>Perera W.A.D.C.T</h3>
+                  <p class="w3-opacity">IT1828436</p>
+                  <p class="w3-opacity">charmthiekshana97@gmail.com</p>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+      <!-- Footer -->
+
+
+      <!-- END PAGE CONTENT -->
+
+
+
+
+
+
+
+
+</body>
+
+</html>

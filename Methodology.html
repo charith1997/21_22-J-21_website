@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<title>Methodology</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <img src="Shevonlogo.png" style="width:100%">
+  <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-eye w3-xxlarge"></i>
+    <p>PHOTOS</p>
+  </a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  
+ 
+
+<style>
+.button {
+  background-color: #e02f2f; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+</style>
+
+
+<div class="row">
+  <div class="col-sm-5 w3-container w3-padding-32" style="background-color:#222; text-align: justify;">
+    
+    <br><br><br><br>
+    <center><h1>Methodology</h1></center><br><br><br>
+    
+
+<h2>A. Weather detection and forecasting</h2>
+<p>For the weather forecasting, Long Short-Term Memory (LSTM) and Facebook Prophet algorithms have been used. By testing the algorithms, Prophet has been used for the final forecasting. Because Prophet is very accurate and fast as well as it is fully automatic as a time forecasting model. Prophet always takes a data frame with two columns: ds and y. The ds (datestamp) column should have a Pandas-friendly format, such as YYYY-MM-DD for dates and y column, which represents the measurement we want to forecast, must be numeric. The four parameters Temperature, Humidity, Pressure and Rainfall is predicted for weekly, monthly, and yearly dataframes.
+To measure the real-time data, there are some sensors and modules have been used with raspberry pi 4 board. Temperature and Humidity are taken from DHT22 module. Barometric pressure is taken from BMP280 barometric pressure sensor. To measure rainfall, it took more effort to measure rainfall. Raindrop sensor, PCF8531 ADC IC, servo motor and the water level sensor are used to measure rainfall.
+After getting the real-time data it will push to the designed web application as real-time weather data. The real-time weather data (temperature, humidity, barometric pressure and rainfall) are updated in every 5 seconds.</p>
+
+
+
+<h2>B. Flood detection and forecasting</h2>
+<p>The main controller here is a low-cost microprocessor called Raspberry pi. The system uses an ultrasonic sensor and a GPS sensor as sensors. Ultrasonic sensor detects rising and falling water levels, and GPS sensors track the location of the device[5]. Data from the ultrasonic sensor is uploaded to the Google Spreadsheet via the Raspberry pi device. The data are analyzed to identify patterns in the data and to study the difference in water level.
+Grey Model (1,1) is one of the predicting strategies that has proven to be successful in prediction. Grey modeling (1,1) does not require any prior information and can be utilized when there is a limited amount of input data. According to the gray system theory, the first-order accumulation sequence (1-AGO) created. The Grey model has the advantage in flood forecasting of being simple to apply in forecasting without presuming that anticipated storm occurrences have the same stochastic characteristics as the storm events themselves. The main advantage of the Grey model in rainfall-runoff modeling is that no past assumption about the processes involved are required[9]. In this case this project considering two major reasons about flood occurring. Rainfall changing chart and flood level changing chart are shown the major reasons for flood occurring.
+The difference is shown that the simple grey prediction model can accurately estimate flood stage utilizing two observations of water level and rainfall level for the research scenarios, especially in places where hydrological data is scarce[10]. The data are analyzed to identify patterns and created the rainfall prediction chart and water level prediction chart.</p>
+
+
+
+<h2>C. Chatbot</h2>
+<p>In this chatbot, the main functionality is to give an accurate and more reliable answer to the end-users’ questions. Without any delay end, users can get the live pieces of information about the disasters. in this chatbot system, there are 5 main entities. They are UI, NLP, Algorithm, API, and training data.
+The first process of the This pipeline is Tokenization. Tokenization is the process of breaking down large amounts of text into smaller bits. Tokenization divides the raw text into words and phrases, which are referred to as tokens. Next tokenized words are going through the steaming process. in this process these words will reduce a word to its word stem, which affixes to suffixes and prefixes or to the roots of words known as a lemma, is known as stemming. Finally, it will give an output as a Bag of words (Bow). The bow is a technique for extracting text characteristics for use in modelling, such as with machine learning techniques. After this NLP Pre-processing Pipeline, The Bag of words is directed to a Feedforward neural network. This Feedforward neural network consists of three layers. The bag of words which is an output of the NLP pre-processing pipeline, will go through this three-layer and go to a SoftMax. Then it will output the most accurate answer for the end user’s question.</p>
+
+
+
+<h2>D. Flooding area visualization</h2>
+<p>Using Time Series Forecasting to display a 7-day flood prediction on a map, the user may get a more reliable prediction. The proposed system acts as a flood victim's assistant by recommending the safest sites for floods. For this, an ARIMA model is proposed to develop time series forecasting for the system. The purpose of this approach is to use a map of Sri Lanka to show where flooding is expected to occur and how much of the region will be flooded if rain falls this week. In this tutorial, we will be building an interactive map that predicts floods in Sri Lanka based on the ARIMA model. Our map will have a user interface which lets users can see flood from different locations in Sri Lanka and view the number of floods that are predicted for that location. The IOT devices, which give rainfall forecasts in the research locations, deliver the predicted flood data. The application will be built with the Python, Flask, and Matplotlib libraries.</p>
+
+</h6><br><br><br><br><br><br><br><br><br><br>
+
+
+   <br> 
+
+
+</div>
+
+
+
+
+
+  
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+</body>
+</html>
